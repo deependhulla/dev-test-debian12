@@ -1,0 +1,22 @@
+##### configure proper timezone
+#dpkg-reconfigure tzdata
+##### configure locale proper
+#dpkg-reconfigure locales
+## set India IST time.
+#/bin/rm -rf /etc/localtime
+#/bin/ln -vs /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
+#### for adding firmware realtek driver
+#apt-get install firmware-linux-nonfree
+#apt-get install firmware-realtek
+#update-initramfs -u
+## only if VM notfor LXC
+## for proxmox/kvm better preformance
+#apt-get -y install qemu-guest-agent
+## if on Consle need Mouse to use for copy paste use gpm
+#apt-get install gpm
+#google dns: [2001:4860:4860::8888]
+#cloudflare dns: [2606:4700:4700::1111]
+
+## Another option for virtual-mail-setup
+## apt-get install vmm vmm-doc
+
