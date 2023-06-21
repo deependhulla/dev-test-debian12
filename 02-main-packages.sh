@@ -10,6 +10,8 @@ sysctl -w net.ipv6.conf.default.disable_ipv6=1 1>/dev/null
 #################
 ### Copying again repo and basic package if not install to get it install.
 #################
+export LC_CTYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 
 ## backup existing repo by copy just for safety
 mkdir -p /opt/old-config-backup/ 2>/dev/null
@@ -55,7 +57,21 @@ python3-openssl python3-parsedatetime python3-rfc3339 python3-tz python-certbot-
 python3-certbot-nginx dbconfig-mysql uw-mailutils libposix-strptime-perl libmcrypt-dev \
 libencode-eucjpascii-perl libencode-hanextra-perl libpod2-base-perl libanyevent-perl \
 libcache-memcached-perl libmemcached11 libyaml-perl pkg-php-tools  php-composer-ca-bundle \
-php-composer-pcre  php-composer-semver  php-composer-class-map-generator php-composer-metadata-minifier
+libalgorithm-c3-perl libb-hooks-endofscope-perl libb-hooks-op-check-perl libclass-c3-perl \
+libclass-c3-xs-perl libclass-data-inheritable-perl libclass-inspector-perl \
+libclass-method-modifiers-perl libclass-singleton-perl libclass-xsaccessor-perl \
+libdata-optlist-perl libdatetime-locale-perl libdatetime-perl libdatetime-timezone-perl \
+libdevel-callchecker-perl libdevel-caller-perl libdevel-lexalias-perl \
+libdevel-stacktrace-perl libdynaloader-functions-perl libeval-closure-perl \
+libexception-class-perl libfile-sharedir-perl libmodule-implementation-perl \
+libmodule-runtime-perl libmro-compat-perl libnamespace-autoclean-perl \
+libnamespace-clean-perl libpackage-stash-perl libpackage-stash-xs-perl libpadwalker-perl \
+libparams-classify-perl libparams-util-perl libparams-validationcompiler-perl libreadonly-perl \
+libref-util-perl libref-util-xs-perl librole-tiny-perl libspecio-perl libsub-exporter-perl \
+libsub-exporter-progressive-perl libsub-identify-perl libsub-install-perl libsub-name-perl \
+libsub-quote-perl libtry-tiny-perl libvariable-magic-perl php-composer-pcre php-composer-semver \
+php-composer-class-map-generator php-composer-metadata-minifier
+
 
 ## for WireGuard Tunnel VPN/SDN
 #apt -y wireguard  wireguard-tools
@@ -170,13 +186,13 @@ echo "alias ls='ls --color=auto'" >> /etc/bash.bashrc
 echo "alias mv='mv -i'" >> /etc/bash.bashrc
 echo "alias rm='rm -i'" >> /etc/bash.bashrc
 echo "export EDITOR=vi" >> /etc/bash.bashrc
+echo "export LC_CTYPE=en_US.UTF-8" >> /etc/bash.bashrc
+echo "export LC_ALL=en_US.UTF-8" >> /etc/bash.bashrc
 
 ## for using crontab via vi editor
 export EDITOR=vi
 
-#Load bashrc
-#bash
-#source /etc/bash.bashrc
+## etc-backup and postfix pfHandle
 /bin/cp -p files/extra-files/etc-config-backup.sh /bin/
 /bin/cp -p files/extra-files/pfHandle /bin/
 ## safe backup
@@ -190,8 +206,8 @@ systemctl restart  cron
 systemctl restart  mariadb
 
 ## if ZFS is used for Storage specailly for Archive Server
-DEBIAN_FRONTEND=noninteractive apt -y install zfs-dkms zfsutils-linux zfs-zed
-apt -y install dpkg-dev linux-headers-$(uname -r) linux-image-amd64
+#DEBIAN_FRONTEND=noninteractive apt -y install zfs-dkms zfsutils-linux zfs-zed
+#apt -y install dpkg-dev linux-headers-$(uname -r) linux-image-amd64
 
 
 
