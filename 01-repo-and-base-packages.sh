@@ -186,8 +186,8 @@ systemctl restart  cron
 systemctl restart  mariadb
 
 ## if ZFS is used for Storage specailly for Archive Server
-DEBIAN_FRONTEND=noninteractive apt -y install zfs-dkms zfsutils-linux zfs-zed
-apt -y install dpkg-dev linux-headers-$(uname -r) linux-image-amd64
+# DEBIAN_FRONTEND=noninteractive apt -y install zfs-dkms zfsutils-linux zfs-zed
+# apt -y install dpkg-dev linux-headers-$(uname -r) linux-image-amd64
 
 
 
