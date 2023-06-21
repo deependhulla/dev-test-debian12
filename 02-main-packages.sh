@@ -7,6 +7,10 @@ timedatectl set-timezone 'Asia/Kolkata'
 sysctl -w net.ipv6.conf.all.disable_ipv6=1 1>/dev/null
 sysctl -w net.ipv6.conf.default.disable_ipv6=1 1>/dev/null
 
+#################
+### Copying again repo and basic package if not install to get it install.
+#################
+
 ## backup existing repo by copy just for safety
 mkdir -p /opt/old-config-backup/ 2>/dev/null
 /bin/cp -pR /etc/apt/sources.list /opt/old-config-backup/old-sources.list-`date +%s`

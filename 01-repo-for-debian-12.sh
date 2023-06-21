@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # for Debian 12
 
@@ -13,6 +13,9 @@ echo "deb http://security.debian.org/debian-security bookworm-security main non-
 echo "deb-src http://security.debian.org/debian-security bookworm-security main non-free-firmware contrib non-free" >> /etc/apt/sources.list
 echo "deb http://deb.debian.org/debian/ bookworm-updates main non-free-firmware contrib non-free" >> /etc/apt/sources.list
 echo "deb-src http://deb.debian.org/debian/ bookworm-updates main non-free-firmware contrib non-free" >> /etc/apt/sources.list
+
+## set to India IST timezone -- You can dissable it if needed
+timedatectl set-timezone 'Asia/Kolkata'
 
 
 apt update
@@ -29,4 +32,16 @@ systemctl restart chrony
 echo "\"set mouse=a/g" >  ~/.vimrc
 echo "syntax on" >> ~/.vimrc
 
-echo " Please Logout and login again so that bashrc is reloaded for you"
+# Reset
+Color_Off='\033[0m'       # Text Reset
+On_IRed='\033[0;101m'     # Red
+
+echo $White $On_IRed 
+echo "IS THE HOSTNAME CORRECT !!! : "
+ hostname -f
+echo "IS DATE AND TIME CORRECT !!! : ";
+ date
+echo "IF NOT SET IT PROPERLY SET IT."
+echo "...............................";
+echo $Color_Off
+
