@@ -185,5 +185,10 @@ systemctl restart  apache2
 systemctl restart  cron
 systemctl restart  mariadb
 
+## if ZFS is used for Storage specailly for Archive Server
+DEBIAN_FRONTEND=noninteractive apt -y install zfs-dkms zfsutils-linux zfs-zed
+apt -y install dpkg-dev linux-headers-$(uname -r) linux-image-amd64
+
+
 
 echo " Please Logout and login again so that bashrc is reloaded for you"
