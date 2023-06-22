@@ -32,6 +32,23 @@ systemctl restart chrony
 echo "\"set mouse=a/g" >  ~/.vimrc
 echo "syntax on" >> ~/.vimrc
 
+## centos 7 like bash ..for all inteactive 
+echo "" >> /etc/bash.bashrc
+echo "alias cp='cp -i'" >> /etc/bash.bashrc
+echo "alias l.='ls -d .* --color=auto'" >> /etc/bash.bashrc
+echo "alias ll='ls -l --color=auto'" >> /etc/bash.bashrc
+echo "alias ls='ls --color=auto'" >> /etc/bash.bashrc
+echo "alias mv='mv -i'" >> /etc/bash.bashrc
+echo "alias rm='rm -i'" >> /etc/bash.bashrc
+echo "export EDITOR=vi" >> /etc/bash.bashrc
+echo "export LC_CTYPE=en_US.UTF-8" >> /etc/bash.bashrc
+echo "export LC_ALL=en_US.UTF-8" >> /etc/bash.bashrc
+
+
+##Comment this if you do not want root login via ssh activated using port 7722
+sed -i "s/#PermitRootLogin prohibit-password/PermitRootLogin yes/g" /etc/ssh/sshd_config
+#sed -i "s/#Port 22/Port 7722/g" /etc/ssh/sshd_config
+
 # Reset
 Color_Off='\033[0m'       # Text Reset
 On_IRed='\033[0;101m'     # Red
