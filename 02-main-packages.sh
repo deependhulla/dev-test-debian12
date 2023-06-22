@@ -76,7 +76,10 @@ dovecot-managesieved dovecot-imapd dovecot-pop3d dovecot-sieve dovecot-antispam 
 dovecot-fts-xapian postfix-pcre postfwd  opendkim opendkim-tools xapian-tools recoll \
 libdatetime-format-mail-perl fetchmail imapproxy spamassassin libgssapi-perl \
 razor pyzor libencode-detect-perl libgeoip2-perl libnet-patricia-perl libbsd-resource-perl \
-libencoding-fixlatin-perl libencoding-fixlatin-xs-perl liburi-encode-perl libtest-manifest-perl
+libencoding-fixlatin-perl libencoding-fixlatin-xs-perl liburi-encode-perl \
+libtest-manifest-perl libbusiness-isbn-data-perl libfilesys-df-perl \
+geoip-database libgeoip1 pax libmail-milter-perl clamav clamav-base \
+clamav-daemon clamav-freshclam libclamav-client-perl ibclamav-dev libclamav11
 
 
 ## for WireGuard Tunnel VPN/SDN
