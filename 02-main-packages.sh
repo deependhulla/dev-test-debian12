@@ -40,19 +40,19 @@ apt -y upgrade
 apt -y install chrony vim curl git software-properties-common dirmngr \
 sshfs parted gdisk screen mc apt-transport-https lsb-release ca-certificates \
 openssh-server iptraf-ng telnet iputils-ping debconf-utils pwgen xfsprogs \
-iftop htop multitail net-tools elinks wget pssh jq inotify-tools vnstat \
+rclone iftop htop multitail net-tools elinks wget pssh jq inotify-tools vnstat \
 arping dnsutils dos2unix ethtool sudo iptables postfix iptables-persistent \
 build-essential rsyslog gnupg2 zip rar unrar catdoc unzip tar imagemagick ftp \
 cloud-guest-utils poppler-utils tnef whois rsync mariadb-server automysqlbackup apache2  \
-imagemagick cifs-utils tesseract-ocr tesseract-ocr-eng poppler-utils exiv2 \
-libnet-dns-perl libmailtools-perl php-mail-mime sendemail augeas-lenses certbot \
-dbconfig-common libapache2-mod-php libapache2-mod-php8.2 libarchive-zip-perl \
+s4cmd imagemagick cifs-utils tesseract-ocr tesseract-ocr-eng poppler-utils exiv2 \
+s3backer s3cmd libnet-dns-perl libmailtools-perl php-mail-mime sendemail augeas-lenses certbot \
+s3fs dbconfig-common libapache2-mod-php libapache2-mod-php8.2 libarchive-zip-perl \
 libaugeas0 libauthen-pam-perl libc-client2007e libdbd-mysql-perl libevent-2.1-7 \
-libhashkit2 iperf libimage-exiftool-perl libio-pty-perl libmcrypt4  libmhash2 \
-libmime-charset-perl libsombok3 libtext-template-perl libunicode-linebreak-perl \
+libhashkit2 iperf libimage-exiftool-perl libio-pty-perl libmcrypt4  libmhash2 libdevel-lexalias-perl \
+libmime-charset-perl libsombok3 libtext-template-perl libunicode-linebreak-perl libdevel-caller-perl \
 libzip4 mcrypt memcached mlock mysqltuner perl-doc php php-apcu php-bcmath php-curl \
 php-gd php-imagick php-imap php-intl php-ldap php-mailparse php-memcached php-mysql \
-php-zip php8.2 php8.2-apcu php8.2-bcmath php8.2-curl php8.2-gd php8.2-igbinary \
+php-zip php8.2 php8.2-apcu php8.2-bcmath php8.2-curl php8.2-gd php8.2-igbinary 7zip \
 php8.2-imagick php8.2-imap php8.2-intl php8.2-ldap php8.2-mailparse php8.2-memcached \
 php8.2-msgpack php8.2-mysql php8.2-zip python3-acme python3-augeas python3-certbot \
 python3-certbot-apache python3-configargparse python3-configobj python3-icu python3-josepy \
@@ -64,10 +64,10 @@ libalgorithm-c3-perl libb-hooks-endofscope-perl libb-hooks-op-check-perl libclas
 libclass-c3-xs-perl libclass-data-inheritable-perl libclass-inspector-perl \
 libclass-method-modifiers-perl libclass-singleton-perl libclass-xsaccessor-perl \
 libdata-optlist-perl libdatetime-locale-perl libdatetime-perl libdatetime-timezone-perl \
-libdevel-callchecker-perl libdevel-caller-perl libdevel-lexalias-perl 7zip \
+phpmyadmin php-phpmyadmin-shapefile php-phpmyadmin-sql-parser libdevel-callchecker-perl \
 libdevel-stacktrace-perl libdynaloader-functions-perl libeval-closure-perl \
 libexception-class-perl qpsmtpd libfile-sharedir-perl libmodule-implementation-perl \
-libmodule-runtime-perl bc libmro-compat-perl libnamespace-autoclean-perl \
+davfs2 libmodule-runtime-perl bc libmro-compat-perl libnamespace-autoclean-perl \
 libnamespace-clean-perl libpackage-stash-perl libpackage-stash-xs-perl libpadwalker-perl \
 libparams-classify-perl libparams-util-perl libparams-validationcompiler-perl libreadonly-perl \
 libref-util-perl libref-util-xs-perl librole-tiny-perl libspecio-perl libsub-exporter-perl \
@@ -96,6 +96,17 @@ apt-get install dovecot-lmtpd  dovecot-sqlite dovecot-submissiond libcrypt-sslea
 
 ## ftp server 
 # apt -y proftpd
+
+## s3 backup tool -- 
+#s3backer s3cmd s3fs
+#s3backer - Amazon AWS S3-backed virtual hard disk device
+#s3cmd - command-line Amazon S3 client
+#s3fs - FUSE-based file system backed by Amazon S3
+#s4cmd - Super Amazon S3 command line tool
+
+
+## check rclone for backup to other cloud provider
+## rclone is install
 
 ## IPMI-Tool for IKVM Management
 # apt -y install ipmitool
