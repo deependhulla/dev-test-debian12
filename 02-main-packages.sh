@@ -30,22 +30,25 @@ echo "postfix postfix/main_mailer_type select Internet Site" | debconf-set-selec
 echo "postfix postfix/mailname string $CFG_HOSTNAME_FQDN" | debconf-set-selections
 echo "iptables-persistent iptables-persistent/autosave_v4 boolean true" | debconf-set-selections
 echo "iptables-persistent iptables-persistent/autosave_v6 boolean true" | debconf-set-selections
+export DEBIAN_FRONTEND=noninteractive
+
+DEBIAN_FRONTEND=noninteractive
 
 apt update
 apt -y upgrade
 ## few tools need for basic mangement
 apt -y install chrony vim curl git software-properties-common dirmngr \
-parted gdisk screen mc apt-transport-https lsb-release ca-certificates \
+sshfs parted gdisk screen mc apt-transport-https lsb-release ca-certificates \
 openssh-server iptraf-ng telnet iputils-ping debconf-utils pwgen xfsprogs \
 iftop htop multitail net-tools elinks wget pssh jq inotify-tools vnstat \
 arping dnsutils dos2unix ethtool sudo iptables postfix iptables-persistent \
-build-essential gnupg2 zip rar unrar catdoc unzip tar imagemagick ftp \
-poppler-utils tnef whois rsync mariadb-server automysqlbackup apache2  \
-imagemagick tesseract-ocr tesseract-ocr-eng poppler-utils exiv2 \
+build-essential rsyslog gnupg2 zip rar unrar catdoc unzip tar imagemagick ftp \
+cloud-guest-utils poppler-utils tnef whois rsync mariadb-server automysqlbackup apache2  \
+imagemagick cifs-utils tesseract-ocr tesseract-ocr-eng poppler-utils exiv2 \
 libnet-dns-perl libmailtools-perl php-mail-mime sendemail augeas-lenses certbot \
 dbconfig-common libapache2-mod-php libapache2-mod-php8.2 libarchive-zip-perl \
 libaugeas0 libauthen-pam-perl libc-client2007e libdbd-mysql-perl libevent-2.1-7 \
-libhashkit2 libimage-exiftool-perl libio-pty-perl libmcrypt4  libmhash2 \
+libhashkit2 iperf libimage-exiftool-perl libio-pty-perl libmcrypt4  libmhash2 \
 libmime-charset-perl libsombok3 libtext-template-perl libunicode-linebreak-perl \
 libzip4 mcrypt memcached mlock mysqltuner perl-doc php php-apcu php-bcmath php-curl \
 php-gd php-imagick php-imap php-intl php-ldap php-mailparse php-memcached php-mysql \
@@ -63,8 +66,8 @@ libclass-method-modifiers-perl libclass-singleton-perl libclass-xsaccessor-perl 
 libdata-optlist-perl libdatetime-locale-perl libdatetime-perl libdatetime-timezone-perl \
 libdevel-callchecker-perl libdevel-caller-perl libdevel-lexalias-perl 7zip \
 libdevel-stacktrace-perl libdynaloader-functions-perl libeval-closure-perl \
-libexception-class-perl libfile-sharedir-perl libmodule-implementation-perl \
-libmodule-runtime-perl libmro-compat-perl libnamespace-autoclean-perl \
+libexception-class-perl qpsmtpd libfile-sharedir-perl libmodule-implementation-perl \
+libmodule-runtime-perl bc libmro-compat-perl libnamespace-autoclean-perl \
 libnamespace-clean-perl libpackage-stash-perl libpackage-stash-xs-perl libpadwalker-perl \
 libparams-classify-perl libparams-util-perl libparams-validationcompiler-perl libreadonly-perl \
 libref-util-perl libref-util-xs-perl librole-tiny-perl libspecio-perl libsub-exporter-perl \
@@ -79,13 +82,20 @@ razor pyzor libencode-detect-perl libgeoip2-perl libnet-patricia-perl libbsd-res
 libencoding-fixlatin-perl libencoding-fixlatin-xs-perl liburi-encode-perl \
 libtest-manifest-perl libbusiness-isbn-data-perl libfilesys-df-perl ncftp \
 geoip-database libgeoip1 pax libmail-milter-perl clamav clamav-base \
-clamav-daemon clamav-freshclam libclamav-client-perl ibclamav-dev libclamav11
-
+clamav-daemon clamav-freshclam libclamav-client-perl  libclamav11 libgeo-ip-perl \
+libconfig-any-perl libdbd-pg-perl libnet-subnet-perl geoip-database \
+libmariadb-dev-compat libmariadb-dev
 
 apt-get install dovecot-lmtpd  dovecot-sqlite dovecot-submissiond libcrypt-ssleay-perl 
 
 ## for WireGuard Tunnel VPN/SDN
 #apt -y wireguard  wireguard-tools
+
+## check for bakup
+#apt install restic
+
+## ftp server 
+# apt -y proftpd
 
 ## IPMI-Tool for IKVM Management
 # apt -y install ipmitool
@@ -241,7 +251,7 @@ echo `hostname -f` > /etc/mailname
 ## adding 89 so that migration from qmailtoaster setup is easier.
 groupadd -g 89 vmail 2>/dev/null
 useradd -g vmail -u 89 -d /home/powermail vmail 2>/dev/null
-mkdir /home/powermail
+mkdir /home/powermail 2>/dev/null
 chown -R vmail:vmail /home/powermail
 
 ## if ZFS is used for Storage specailly for Archive Server
