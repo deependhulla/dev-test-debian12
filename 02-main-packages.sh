@@ -61,7 +61,7 @@ libalgorithm-c3-perl libb-hooks-endofscope-perl libb-hooks-op-check-perl libclas
 libclass-c3-xs-perl libclass-data-inheritable-perl libclass-inspector-perl \
 libclass-method-modifiers-perl libclass-singleton-perl libclass-xsaccessor-perl \
 libdata-optlist-perl libdatetime-locale-perl libdatetime-perl libdatetime-timezone-perl \
-libdevel-callchecker-perl libdevel-caller-perl libdevel-lexalias-perl \
+libdevel-callchecker-perl libdevel-caller-perl libdevel-lexalias-perl 7zip \
 libdevel-stacktrace-perl libdynaloader-functions-perl libeval-closure-perl \
 libexception-class-perl libfile-sharedir-perl libmodule-implementation-perl \
 libmodule-runtime-perl libmro-compat-perl libnamespace-autoclean-perl \
@@ -77,10 +77,12 @@ dovecot-fts-xapian postfix-pcre postfwd  opendkim opendkim-tools xapian-tools re
 libdatetime-format-mail-perl fetchmail imapproxy spamassassin libgssapi-perl \
 razor pyzor libencode-detect-perl libgeoip2-perl libnet-patricia-perl libbsd-resource-perl \
 libencoding-fixlatin-perl libencoding-fixlatin-xs-perl liburi-encode-perl \
-libtest-manifest-perl libbusiness-isbn-data-perl libfilesys-df-perl \
+libtest-manifest-perl libbusiness-isbn-data-perl libfilesys-df-perl ncftp \
 geoip-database libgeoip1 pax libmail-milter-perl clamav clamav-base \
 clamav-daemon clamav-freshclam libclamav-client-perl ibclamav-dev libclamav11
 
+
+apt-get install dovecot-lmtpd  dovecot-sqlite dovecot-submissiond libcrypt-ssleay-perl 
 
 ## for WireGuard Tunnel VPN/SDN
 #apt -y wireguard  wireguard-tools
