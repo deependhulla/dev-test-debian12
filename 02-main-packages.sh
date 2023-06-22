@@ -76,7 +76,7 @@ dovecot-managesieved dovecot-imapd dovecot-pop3d dovecot-sieve dovecot-antispam 
 dovecot-fts-xapian postfix-pcre postfwd  opendkim opendkim-tools xapian-tools recoll \
 libdatetime-format-mail-perl fetchmail imapproxy spamassassin libgssapi-perl \
 razor pyzor libencode-detect-perl libgeoip2-perl libnet-patricia-perl libbsd-resource-perl \
-libencoding-fixlatin-perl libencoding-fixlatin-xs-perl liburi-encode-perl
+libencoding-fixlatin-perl libencoding-fixlatin-xs-perl liburi-encode-perl libtest-manifest-perl
 
 
 ## for WireGuard Tunnel VPN/SDN
@@ -210,6 +210,34 @@ systemctl stop nginx
 systemctl restart  apache2
 systemctl restart  cron
 systemctl restart  mariadb
+##disable this program as not needed
+systemctl stop ModemManager 1>/dev/null 2>/dev/null
+systemctl disable ModemManager 1>/dev/null 2>/dev/null
+systemctl stop wpa_supplicant 1>/dev/null 2>/dev/null
+systemctl disable wpa_supplicant 1>/dev/null 2>/dev/null
+
+# use only for heavy load server via Service or use nginx 
+systemctl stop imapproxy.service 2>/dev/null
+systemctl disable imapproxy.service 2>/dev/null
+
+sed -i "s/#RateLimitIntervalSec=30s/RateLimitIntervalSec=0/"  /etc/systemd/journald.conf
+sed -i "s/#RateLimitBurst=10000/RateLimitBurst=0/"  /etc/systemd/journald.conf
+systemctl restart systemd-journald
+
+
+sed -i "s/SOCKET\=local\:\$RUNDIR\/opendkim.sock/#SOCKET\=local\:\$RUNDIR\/opendkim.sock/" /etc/default/opendkim
+sed -i "s/#SOCKET\=inet\:12345\@localhost/SOCKET\=inet\:12345\@localhost/" /etc/default/opendkim
+/lib/opendkim/opendkim.service.generate
+systemctl daemon-reload
+
+
+
+echo `hostname -f` > /etc/mailname
+## adding 89 so that migration from qmailtoaster setup is easier.
+groupadd -g 89 vmail 2>/dev/null
+useradd -g vmail -u 89 -d /home/powermail vmail 2>/dev/null
+mkdir /home/powermail
+chown -R vmail:vmail /home/powermail
 
 ## if ZFS is used for Storage specailly for Archive Server
 #DEBIAN_FRONTEND=noninteractive apt -y install zfs-dkms zfsutils-linux zfs-zed
