@@ -34,7 +34,7 @@ echo "iptables-persistent iptables-persistent/autosave_v6 boolean true" | debcon
 apt update
 apt -y upgrade
 ## few tools need for basic mangement
-apt -y install vim curl git software-properties-common dirmngr \
+apt -y install chrony vim curl git software-properties-common dirmngr \
 parted gdisk screen mc apt-transport-https lsb-release ca-certificates \
 openssh-server iptraf-ng telnet iputils-ping debconf-utils pwgen xfsprogs \
 iftop htop multitail net-tools elinks wget pssh jq inotify-tools vnstat \
@@ -69,8 +69,14 @@ libnamespace-clean-perl libpackage-stash-perl libpackage-stash-xs-perl libpadwal
 libparams-classify-perl libparams-util-perl libparams-validationcompiler-perl libreadonly-perl \
 libref-util-perl libref-util-xs-perl librole-tiny-perl libspecio-perl libsub-exporter-perl \
 libsub-exporter-progressive-perl libsub-identify-perl libsub-install-perl libsub-name-perl \
-libsub-quote-perl libtry-tiny-perl libvariable-magic-perl php-composer-pcre php-composer-semver \
-php-composer-class-map-generator php-composer-metadata-minifier
+libsub-quote-perl libtry-tiny-perl libvariable-magic-perl php-composer-pcre \
+php-composer-semver php-composer-class-map-generator php-composer-metadata-minifier \
+nginx-full php-fpm php-pear unbound postfix-mysql dovecot-mysql dovecot-sieve \
+dovecot-managesieved dovecot-imapd dovecot-pop3d dovecot-sieve dovecot-antispam \
+dovecot-fts-xapian postfix-pcre postfwd  opendkim opendkim-tools xapian-tools recoll \
+libdatetime-format-mail-perl fetchmail imapproxy spamassassin libgssapi-perl \
+razor pyzor libencode-detect-perl libgeoip2-perl libnet-patricia-perl libbsd-resource-perl \
+libencoding-fixlatin-perl libencoding-fixlatin-xs-perl liburi-encode-perl
 
 
 ## for WireGuard Tunnel VPN/SDN
@@ -107,7 +113,7 @@ a2enmod proxy_http > /dev/null 2>&1
 systemctl stop apache2
 ## usefull for nginx imap & smtp proxy and also for mail-selective-auth
 ## unbound for dns-local cache specialy for mail-dns domain cache
-apt -y install nginx-full php-fpm php-pear unbound
+#apt -y install nginx-full php-fpm php-pear unbound
 systemctl stop php8.2-fpm.service > /dev/null 2>&1
 systemctl disable php8.2-fpm.service > /dev/null 2>&1
 ## keep fpm disabled default -- useful for very high load web-server
@@ -131,7 +137,7 @@ sed -i "s/post_max_size = 100M/post_max_size = 100M/" /etc/php/8.2/apache2/php.i
 sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 50M/" /etc/php/8.2/apache2/php.ini
 
 ## install insstead of systemd-timesyncd for better time sync
-apt -y  install chrony  2>/dev/null 1>/dev/null
+#apt -y  install chrony  2>/dev/null 1>/dev/null
 ## -x option added to allow in LXC
 echo 'DAEMON_OPTS="-F 1 -x "' >  /etc/default/chrony
 systemctl restart chrony
