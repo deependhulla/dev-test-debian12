@@ -24,8 +24,8 @@ apt -y upgrade
 apt -y install vim  openssh-server screen net-tools git mc
 ## install insstead of systemd-timesyncd for better time sync
 apt -y  install chrony  2>/dev/null 1>/dev/null
-## -x option added to allow in LXC
-echo 'DAEMON_OPTS="-F 1 -x "' >  /etc/default/chrony
+## -x option added to allow in LXC --so that it does not update system clock as it job of host pc.
+##echo 'DAEMON_OPTS="-F 1 -x "' >  /etc/default/chrony
 systemctl restart chrony
 
 #Disable vim automatic visual mode using mouse
