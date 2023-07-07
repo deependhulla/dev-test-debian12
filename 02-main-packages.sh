@@ -1,29 +1,10 @@
 #!/bin/bash
 
-## set to India IST timezone -- You can dissable it if needed
-timedatectl set-timezone 'Asia/Kolkata'
-
-##disable ipv6 as most time not required
-sysctl -w net.ipv6.conf.all.disable_ipv6=1 1>/dev/null
-sysctl -w net.ipv6.conf.default.disable_ipv6=1 1>/dev/null
-
 #################
-### Copying again repo and basic package if not install to get it install.
 #################
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-## backup existing repo by copy just for safety
-mkdir -p /opt/old-config-backup/ 2>/dev/null
-/bin/cp -pR /etc/apt/sources.list /opt/old-config-backup/old-sources.list-`date +%s`
-echo "" >  /etc/apt/sources.list
-
-echo "deb http://deb.debian.org/debian/ bookworm main non-free-firmware contrib non-free" >> /etc/apt/sources.list
-echo "deb-src http://deb.debian.org/debian/ bookworm main non-free-firmware contrib non-free" >> /etc/apt/sources.list
-echo "deb http://security.debian.org/debian-security bookworm-security main non-free-firmware contrib non-free" >> /etc/apt/sources.list
-echo "deb-src http://security.debian.org/debian-security bookworm-security main non-free-firmware contrib non-free" >> /etc/apt/sources.list
-echo "deb http://deb.debian.org/debian/ bookworm-updates main non-free-firmware contrib non-free" >> /etc/apt/sources.list
-echo "deb-src http://deb.debian.org/debian/ bookworm-updates main non-free-firmware contrib non-free" >> /etc/apt/sources.list
 
 CFG_HOSTNAME_FQDN=`hostname -f`
 echo "postfix postfix/main_mailer_type select Internet Site" | debconf-set-selections
@@ -86,7 +67,7 @@ clamav-daemon clamav-freshclam libclamav-client-perl  libclamav11 libgeo-ip-perl
 libconfig-any-perl libdbd-pg-perl libnet-subnet-perl geoip-database \
 libmariadb-dev-compat libmariadb-dev
 
-apt-get install dovecot-lmtpd  dovecot-sqlite dovecot-submissiond libcrypt-ssleay-perl 
+apt -y install  dovecot-lmtpd  dovecot-sqlite dovecot-submissiond libcrypt-ssleay-perl 
 
 ## for WireGuard Tunnel VPN/SDN
 #apt -y wireguard  wireguard-tools
@@ -159,8 +140,8 @@ sed -i "s/error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/error_reporting = 
 sed -i "s/error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/error_reporting = E_ERROR/" /etc/php/8.2/apache2/php.ini
 #some more tunning..
 sed -i "s/memory_limit = 128M/memory_limit = 512M/" /etc/php/8.2/apache2/php.ini
-sed -i "s/post_max_size = 100M/post_max_size = 100M/" /etc/php/8.2/apache2/php.ini
-sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 50M/" /etc/php/8.2/apache2/php.ini
+sed -i "s/post_max_size = 100M/post_max_size = 800M/" /etc/php/8.2/apache2/php.ini
+sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 500M/" /etc/php/8.2/apache2/php.ini
 
 ## install insstead of systemd-timesyncd for better time sync
 #apt -y  install chrony  2>/dev/null 1>/dev/null
@@ -174,8 +155,8 @@ systemctl restart chrony
 ## create with default IPV6 disabled 
 touch /etc/rc.local 
 printf '%s\n' '#!/bin/bash'  | tee -a /etc/rc.local 1>/dev/null
-echo "#sysctl -w net.ipv6.conf.all.disable_ipv6=1" >>/etc/rc.local
-echo "#sysctl -w net.ipv6.conf.default.disable_ipv6=1" >> /etc/rc.local
+echo "sysctl -w net.ipv6.conf.all.disable_ipv6=1" >>/etc/rc.local
+echo "sysctl -w net.ipv6.conf.default.disable_ipv6=1" >> /etc/rc.local
 echo "sysctl vm.swappiness=0" >> /etc/rc.local
 echo "exit 0" >> /etc/rc.local
 chmod 755 /etc/rc.local
