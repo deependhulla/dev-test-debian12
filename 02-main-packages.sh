@@ -42,8 +42,8 @@ python3-certbot-nginx dbconfig-mysql uw-mailutils libposix-strptime-perl libmcry
 libencode-eucjpascii-perl libencode-hanextra-perl libpod2-base-perl libanyevent-perl \
 libcache-memcached-perl libmemcached11 libyaml-perl pkg-php-tools  php-composer-ca-bundle \
 libalgorithm-c3-perl libb-hooks-endofscope-perl libb-hooks-op-check-perl libclass-c3-perl \
-libclass-c3-xs-perl libclass-data-inheritable-perl libclass-inspector-perl \
-libclass-method-modifiers-perl libclass-singleton-perl libclass-xsaccessor-perl \
+libclass-c3-xs-perl cmdtest yarnpkg pipenv nodejs npm libclass-data-inheritable-perl \
+libclass-inspector-perl libclass-method-modifiers-perl libclass-singleton-perl libclass-xsaccessor-perl \
 libdata-optlist-perl libdatetime-locale-perl libdatetime-perl libdatetime-timezone-perl \
 phpmyadmin php-phpmyadmin-shapefile php-phpmyadmin-sql-parser libdevel-callchecker-perl \
 libdevel-stacktrace-perl libdynaloader-functions-perl libeval-closure-perl \
